@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Apontamento;
+use App\User;
 use Illuminate\Http\Request;
 
 class ApontamentoController extends Controller
@@ -31,6 +32,17 @@ class ApontamentoController extends Controller
                 "user" => $user,
             ]
         );
+    }
+
+    public function index(Request $request)
+    {
+        $useid = $request->user_id ? $request->user_id : auth()->user()->id;
+        $nome = User::find($useid)->name;
+        $apontamentos = Apontamento::query()->where("user_id","=",$useid)->paginate(20);
+        return view('apontamento.index',[
+            'apontamentos' => $apontamentos,
+            'nome' => $nome,
+        ]);
     }
 
 }

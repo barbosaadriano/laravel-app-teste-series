@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Apontamento extends Model
 {
     protected $fillable = ['codigo'];
-    public $timestamps = false;
 
     public function user()
     {

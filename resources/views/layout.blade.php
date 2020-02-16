@@ -13,6 +13,8 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light mb-2">
      <a class="navbar navbar-expand-lg" href="{{ route('listar_series') }}">Home</a>
      <a class="navbar navbar-expand-lg" href="{{ route('criar_apontamento') }}">Criar Apontamento</a>
+     <a class="navbar navbar-expand-lg" href="{{ route('apontamentos') }}">Ver Apontamentos</a>
+     <a class="navbar navbar-expand-lg" href="{{ route('listar_usuarios') }}">Usuários</a>
      @auth
         <a href="/sair" class="text-danger">Sair</a>
      @endauth
