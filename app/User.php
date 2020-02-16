@@ -42,6 +42,15 @@ class User extends Authenticatable
         return $this->hasMany(Apontamento::class);
     }
 
+    public function empresasGerenciadas()
+    {
+        return $this->hasMany(Empresa::class);
+    }
+    public function empresa()
+    {
+        return $this->belongsTo(Empresa::class);
+    }
+
     /*
         public function hasPermission(Permission $permission)
     {
@@ -60,5 +69,4 @@ class User extends Authenticatable
         return $this->belongsTo(Role::class);
     }
     */
-
 }
