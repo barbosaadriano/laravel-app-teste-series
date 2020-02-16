@@ -29,6 +29,8 @@ Route::post('/temporadas/{temporada}/episodios/assistir', 'EpisodiosController@a
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/apontamento/create','ApontamentoController@create')->middleware('autenticador')->name('criar_apontamento');
+Route::post('/apontamento/create','ApontamentoController@store')->middleware('autenticador')->name('salvar_apontamento');
 
 Route::get('/entrar','EntrarController@index');
 Route::post('/entrar','EntrarController@entrar');

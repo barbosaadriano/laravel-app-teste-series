@@ -10,3 +10,13 @@ APP_ENV=prod
 APP_DEBUG=false
 
 https://laravel.com/docs/5.8/deployment
+
+# Anotações ACL
+
+- Usuários 
+- Papeis
+- Permissões
+- Usuários  n - n papeis
+- Papeis    n - n permissões
+
+
