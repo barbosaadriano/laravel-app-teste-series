@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
+use App\Empresa;
 use Illuminate\Http\Request;
 
-class UsersController extends Controller
+class EmpresaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,13 +14,7 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $empId = session()->has('empresa') ? session()->get('empresa')->id:null;
-        if ($empId!==null) {
-            $users = User::query()->where('empresa_id',"=",$empId)->paginate();
-        } else {
-            $users = User::paginate();
-        }
-        return view('users.index',compact('users'));
+        //
     }
 
     /**
@@ -47,10 +41,10 @@ class UsersController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\User  $user
+     * @param  \App\Empresa  $empresa
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show(Empresa $empresa)
     {
         //
     }
@@ -58,10 +52,10 @@ class UsersController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\User  $user
+     * @param  \App\Empresa  $empresa
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit(Empresa $empresa)
     {
         //
     }
@@ -70,10 +64,10 @@ class UsersController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\User  $user
+     * @param  \App\Empresa  $empresa
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, Empresa $empresa)
     {
         //
     }
@@ -81,11 +75,25 @@ class UsersController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\User  $user
+     * @param  \App\Empresa  $empresa
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy(Empresa $empresa)
     {
         //
+    }
+
+    public function listarParaSelecao()
+    {
+        $user = auth()->user();
+        $empresas = $user->empresasGerenciadas;
+        return view('empresas.selecionar',compact('empresas'));
+    }
+
+    public function selecionar(Empresa $empresa,Request $request)
+    {
+        session()->put('empresa',$empresa);
+        $msg = "Empresa ".$empresa->nome." selecionada com sucesso!";
+        return redirect('')->with('mensagem',$msg);
     }
 }

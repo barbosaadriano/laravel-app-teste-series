@@ -12,4 +12,9 @@ class Apontamento extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function getExportadoAttribute(bool $valor) : string
+    {
+        return $valor ? "Sim" : "Não";
+    }
 }

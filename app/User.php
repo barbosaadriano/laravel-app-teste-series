@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Scopes\EmpresaScope;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -69,4 +70,11 @@ class User extends Authenticatable
         return $this->belongsTo(Role::class);
     }
     */
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::addGlobalScope(new EmpresaScope);
+    }
 }

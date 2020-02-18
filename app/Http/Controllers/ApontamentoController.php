@@ -38,7 +38,10 @@ class ApontamentoController extends Controller
     {
         $useid = $request->user_id ? $request->user_id : auth()->user()->id;
         $nome = User::find($useid)->name;
-        $apontamentos = Apontamento::query()->where("user_id","=",$useid)->paginate(20);
+        $apontamentos = Apontamento::query()
+                            ->where("user_id","=",$useid)
+                            ->orderBy('created_at','desc')
+                            ->paginate(10);
         return view('apontamento.index',[
             'apontamentos' => $apontamentos,
             'nome' => $nome,

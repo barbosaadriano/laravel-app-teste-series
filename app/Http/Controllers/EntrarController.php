@@ -18,6 +18,6 @@ class EntrarController extends Controller
                     ->back()
                     ->withErrors('Usuário e/ou Senha estão corretos!');
         }
-        return redirect()->route('listar_series');
+        return redirect()->route('home');
     }
 }
