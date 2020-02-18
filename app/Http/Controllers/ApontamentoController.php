@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Apontamento;
 use App\User;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ApontamentoController extends Controller
 {
@@ -46,6 +48,44 @@ class ApontamentoController extends Controller
             'apontamentos' => $apontamentos,
             'nome' => $nome,
         ]);
+    }
+
+    public function exportar(User $usuario,string $tipo,Request $request)
+    {
+        $qry = Apontamento::query();
+        $qry->where("user_id","=",$usuario->id);
+        if ($tipo=="nao_exportados") {
+            $qry->where('exportado','=',false);
+        }
+        $apontamentos = $qry->get();
+        if ($apontamentos->count()===0) {
+            return back()->withErrors(["Não há nenhum registro sem exportar, se quer exportar novamente, tente exportar todos!"]);
+        }
+        DB::beginTransaction();
+
+        $filename = "files/filecsv.csv";
+        $handle = fopen($filename,'w+');
+        try {
+            fputcsv($handle,['codigo','momento','usuario'],";");
+            foreach ($apontamentos as $ap) {
+                fputcsv($handle, [
+                    $ap->codigo,
+                    $ap->created_at,
+                    $ap->user->name,
+                ], ";");
+                $ap->exportado = true;
+                $ap->save();
+            }
+            fclose($handle);
+            DB::commit();
+        } catch(Exception $e) {
+            DB::rollback();
+            throw $e;
+        }
+        $headers = [
+            'Content-Type' => 'text/csv',
+        ];
+        return response()->download($filename,'file '.date('d-m-Y H:i:s').'.csv',$headers);
     }
 
 }

@@ -14,8 +14,11 @@
 @endisset
 <p>Exibindo os últimos {{$apontamentos->count()}} registros
     de um total de {{$apontamentos->total()}}</p>
-    <a href="" class="btn btn-success">Exportar Todos</a>
-    <a href="" class="btn btn-success btn-lg mb-2">Exportar registros ainda não exportados</a>
+    @if($apontamentos->total()>0)
+    <a href="{{route('exportar_apontamentos',['usuario'=>$apontamentos[0]->user->id,'tipo'=>'todos'])}}" class="btn btn-success">Exportar Todos</a>
+    <a href="{{route('exportar_apontamentos',['usuario'=>$apontamentos[0]->user->id,'tipo'=>'nao_exportados'])}}"
+        class="btn btn-success btn-lg mb-2">Exportar registros ainda não exportados</a>
+    @endif
     <table class="table">
         <tr>
             <th>Código</th>

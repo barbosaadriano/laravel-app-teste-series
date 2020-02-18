@@ -15,6 +15,7 @@ Route::group(['middleware' => ['autenticador']], function () {
         Route::get('/apontamento/create', 'ApontamentoController@create')->name('criar_apontamento');
         Route::post('/apontamento/create', 'ApontamentoController@store')->name('salvar_apontamento');
         Route::get('/apontamento','ApontamentoController@index')->name('apontamentos');
+        Route::get('/apontamento/exportar/{usuario}/{tipo}','ApontamentoController@exportar')->name('exportar_apontamentos');
 
         Route::group(['prefix' => 'users'], function () {
             Route::get('','UsersController@index')->name('listar_usuarios');
