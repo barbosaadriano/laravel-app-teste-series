@@ -11,11 +11,11 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light mb-2">
+    @auth
      <a class="navbar navbar-expand-lg" href="{{ route('home') }}">Home</a>
      <a class="navbar navbar-expand-lg" href="{{ route('criar_apontamento') }}">Criar Apontamento</a>
      <a class="navbar navbar-expand-lg" href="{{ route('apontamentos') }}">Ver Apontamentos</a>
      <a class="navbar navbar-expand-lg" href="{{ route('listar_usuarios') }}">Usuários</a>
-     @auth
         @if(session('empresa')!==null)
             <a class="navbar navbar-expand-lg"
             href="{{ route('listar_empresas') }}">{{session('empresa')->nome}}</a>

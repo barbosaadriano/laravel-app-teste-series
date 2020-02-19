@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('cabecalho')
-    Registrar-se
+    Complete seu cadastro
 @endsection
 
 @section('conteudo')
@@ -18,17 +18,12 @@
     </div>
 
     <div class="form-group">
-        <label for="name">Sua Empresa</label>
-        <input type="text" name="nomeEmpresa" id="nomeEmpresa" required class="form-control">
-    </div>
-
-    <div class="form-group">
         <label for="password">Senha</label>
         <input type="password" name="password" id="password" required min="1" class="form-control">
     </div>
-
+    <input type="hidden" value="{{$token}}">
     <button type="submit" class="btn btn-primary mt-3">
-        Entrar
+        Criar conta
     </button>
 </form>
 @endsection

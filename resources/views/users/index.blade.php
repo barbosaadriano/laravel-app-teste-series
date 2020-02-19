@@ -9,6 +9,7 @@
 @isset($mensagem)
     @include('mensagem',['mensagem'=>$mensagem])
 @endisset
+<a href="{{route('convidar_usuario')}}" class="btn btn-success mb-3">Convidar Usuário</a>
 <p>Exibindo {{$users->count()}} registros de {{$users->total()}}</p>
 {{$users->links()}}
     <table class="table">

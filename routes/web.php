@@ -19,6 +19,8 @@ Route::group(['middleware' => ['autenticador']], function () {
 
         Route::group(['prefix' => 'users'], function () {
             Route::get('','UsersController@index')->name('listar_usuarios');
+            Route::get('envite','EnviteUserController@index')->name('convidar_usuario');
+            Route::post('envite','EnviteUserController@store')->name('enviar_convite');
         });
         Route::get('','HomeController@index')->name('home');
     });
@@ -32,6 +34,9 @@ Route::get('/entrar', 'EntrarController@index');
 Route::post('/entrar', 'EntrarController@entrar');
 Route::get('/registrar', 'RegistroController@create');
 Route::post('/registrar', 'RegistroController@store');
+Route::get('/aceitar','EnviteUserController@aceitar')->name('aceitar');
+Route::post('/aceitar','RegistroController@store');
+
 Route::get('/sair', function () {
     session()->forget('empresa');
     Auth::logout();
