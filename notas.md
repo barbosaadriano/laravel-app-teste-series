@@ -34,7 +34,7 @@ https://laravel.com/docs/5.8/deployment
 - Gerenciar usuário
     - bloquear usuário
     - Remover usuário
-    - Editar usuário
+    - Editar usuário - ok
     - recuperar senha
 
     - Permissão

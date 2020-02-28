@@ -19,6 +19,10 @@ Route::group(['middleware' => ['autenticador']], function () {
 
         Route::group(['prefix' => 'users'], function () {
             Route::get('','UsersController@index')->name('listar_usuarios');
+            Route::get('editar/{usuario}','UsersController@edit')->name('users.edit');
+            Route::get('bloquear/{usuario}','UsersController@edit')->name('users.block');
+            Route::post('remover/{usuario}','UsersController@destroy')->name('users.rem');
+            Route::put('update/{usuario}','UsersController@update')->name('users.update');
             Route::get('envite','EnviteUserController@index')->name('convidar_usuario');
             Route::post('envite','EnviteUserController@store')->name('enviar_convite');
         });

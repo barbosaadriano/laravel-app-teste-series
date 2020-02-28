@@ -25,7 +25,21 @@
                 <td>{{$u->name}}</td>
                 <td>{{$u->email}}</td>
                 <td>
-                    <a href="{{route('apontamentos',['user_id'=>$u->id])}}" title="ver códigos" class="btn btn-info"><i class="fas fa-barcode"></i></a>
+                    <a href="{{route('apontamentos',['user_id'=>$u->id])}}"
+                        title="ver códigos"
+                        class="btn btn-info"><i class="fas fa-barcode"></i></a>
+
+                    <a href="{{route('users.edit',['usuario'=>$u->id])}}"
+                            title="Editar usuário"
+                            class="btn btn-info ml-3"><i class="fas fa-edit"></i></a>
+
+                    <a href="{{route('users.block',['usuario'=>$u->id])}}"
+                            title="Bloquear usuário"
+                            class="btn btn-warning ml-3"><i class="fas fa-lock"></i></a>
+
+                    <a href="{{route('users.rem',['usuario'=>$u->id])}}"
+                            title="Remover usuário"
+                            class="btn btn-danger ml-3"><i class="fas fa-trash"></i></a>
                 </td>
             </tr>
         @endforeach

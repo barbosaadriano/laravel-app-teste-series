@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UsersController extends Controller
 {
@@ -20,7 +21,8 @@ class UsersController extends Controller
         } else {
             $users = User::paginate();
         }
-        return view('users.index',compact('users'));
+        $mensagem = session()->has('mensagem') ? session()->get('mensagem',false):false;
+        return view('users.index',compact('users','mensagem'));
     }
 
     /**
@@ -61,9 +63,9 @@ class UsersController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit(User $usuario)
     {
-        //
+        return view('users.editform',compact('usuario'));
     }
 
     /**
@@ -73,9 +75,14 @@ class UsersController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, User $usuario)
     {
-        //
+        $usuario->fill($request->except(['_token','_method','password']));
+        if ($request->get('password',null)!==null) {
+            $usuario->password = Hash::make($request->get('password'));
+        }
+        $usuario->save();
+        return redirect()->route('listar_usuarios')->with('mensagem','Usuário salvo com sucesso!');
     }
 
     /**
