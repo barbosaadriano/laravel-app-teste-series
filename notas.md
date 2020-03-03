@@ -37,4 +37,5 @@ https://laravel.com/docs/5.8/deployment
     - Editar usuário - ok
     - recuperar senha
 
-    - Permissão
+    - Permissão 
+https://docs.spatie.be/laravel-permission/v3/basic-usage/artisan/
